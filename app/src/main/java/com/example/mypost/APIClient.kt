@@ -13,3 +13,4 @@ object APIClient {
         return retrofit.create(apiInterface)
     }
 }
+

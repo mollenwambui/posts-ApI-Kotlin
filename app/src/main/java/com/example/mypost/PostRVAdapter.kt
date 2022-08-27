@@ -1,6 +1,7 @@
 package com.example.mypost
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ class PostRVAdapter (var context: Context, var postList: List<Post>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RetrofitViewHolder {
         var binding = PostListItemsBinding
 
-            .inflate(LayoutInflater.from(context), parent, false)
+            .inflate(LayoutInflater.from(parent.context), parent, false)
         return RetrofitViewHolder(binding)
 
     }
@@ -23,6 +24,13 @@ class PostRVAdapter (var context: Context, var postList: List<Post>):
             tvId.text = currentPost.id.toString()
             tvTitle.text = currentPost.title
             tvBody.text = currentPost.body
+
+           val context=holder.itemView.context
+            holder.binding.cvPosts.setOnClickListener {
+                val intent=Intent(context,CommentActivity::class.java)
+                intent.putExtra("POST_ID",currentPost.id)
+                context.startActivity(intent)
+            }
 
         }
     }
